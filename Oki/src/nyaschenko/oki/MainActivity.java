@@ -52,17 +52,6 @@ public class MainActivity extends SlidingFragmentActivity
 	}
 
 	private void initFragments(Bundle savedInstanceState) {
-		/*
-		if (savedInstanceState == null) {
-			menuFragment = new MenuFragment();
-			getSupportFragmentManager().beginTransaction()
-					.replace(R.id.menuFragmentContainer, menuFragment)
-					.commit();
-		} else {
-			menuFragment = (MenuFragment) getSupportFragmentManager()
-					.findFragmentById(R.id.menuFragmentContainer);
-		}*/
-		
 		FragmentManager manager = getSupportFragmentManager();
         SherlockFragment mainFragment = 
         		(SherlockFragment) manager.findFragmentById(R.id.fragmentContainerMain);
@@ -122,11 +111,13 @@ public class MainActivity extends SlidingFragmentActivity
 		getSlidingMenu().setSlidingEnabled(true);
 		setSupportProgressBarIndeterminateVisibility(false);
 		
+		
 		FragmentManager fm = getSupportFragmentManager();
 		fm.beginTransaction()
 				.replace(R.id.fragmentContainerMain, new FeedFragment())
-				.commitAllowingStateLoss();
+				.commit();
 		mCurrentFragment = 0;
+		
 	}
 
 	@Override

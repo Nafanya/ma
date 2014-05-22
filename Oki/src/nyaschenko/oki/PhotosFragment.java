@@ -154,6 +154,7 @@ public class PhotosFragment extends SherlockFragment {
 		if (!mHasMore || mLoadingMore) {
 			return;
 		}
+		getSherlockActivity().setSupportProgressBarIndeterminateVisibility(true);
 		mLoadingMore = true;
 		HashMap<String, String> params = new HashMap<String, String>();
 		if (mUserId != null) {
@@ -262,6 +263,7 @@ public class PhotosFragment extends SherlockFragment {
 			mAdapter.notifyDataSetChanged();
 		}
 		mLoadingMore = false;
+		getSherlockActivity().setSupportProgressBarIndeterminateVisibility(false);
 	}
 	
 	@Override

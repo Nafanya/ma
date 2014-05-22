@@ -102,6 +102,7 @@ public class FeedFragment extends SherlockFragment {
 	String mAnchor = null;
 	boolean mHasMore = true;
 	boolean mLoadingMore = false;
+	boolean mUpdatingFeed = false;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -188,9 +189,9 @@ public class FeedFragment extends SherlockFragment {
 			case R.id.action_refresh:
 				//Toast.makeText(getSherlockActivity(), "Refresh clicked", Toast.LENGTH_SHORT).show();
 				if (!mLoadingMore) {
-					mFeedItems.clear();
 					mAnchor = null;
 					mHasMore = true;
+					mUpdatingFeed = true;
 					getFeed();
 					getSherlockActivity().setSupportProgressBarIndeterminateVisibility(true);
 				}
@@ -372,18 +373,22 @@ public class FeedFragment extends SherlockFragment {
 	        HashMap<String, String> photos = new HashMap<String, String>();
 	        HashMap<String, String> groupPhotos = new HashMap<String, String>();
 	        
-	        for (int i = 0; i < _photos.size(); i++) {
-	        	JSONObject cur = (JSONObject) _photos.get(i);
-	        	String ref = (String) cur.get("ref");
-	        	String pic = (String) cur.get("pic640x480");
-	        	photos.put(ref, pic);
+	        if (_photos != null) {
+		        for (int i = 0; i < _photos.size(); i++) {
+		        	JSONObject cur = (JSONObject) _photos.get(i);
+		        	String ref = (String) cur.get("ref");
+		        	String pic = (String) cur.get("pic640x480");
+		        	photos.put(ref, pic);
+		        }
 	        }
 	        
-	        for (int i = 0; i < _groupPhotos.size(); i++) {
-	        	JSONObject cur = (JSONObject) _groupPhotos.get(i);
-	        	String ref = (String) cur.get("ref");
-	        	String pic = (String) cur.get("pic640x480");
-	        	groupPhotos.put(ref, pic);
+	        if (_groupPhotos != null) {
+		        for (int i = 0; i < _groupPhotos.size(); i++) {
+		        	JSONObject cur = (JSONObject) _groupPhotos.get(i);
+		        	String ref = (String) cur.get("ref");
+		        	String pic = (String) cur.get("pic640x480");
+		        	groupPhotos.put(ref, pic);
+		        }
 	        }
 			
 			
@@ -430,6 +435,11 @@ public class FeedFragment extends SherlockFragment {
 	        
 		} catch (Exception e) {
 			Log.e(TAG, "Parse failed, " + e.toString());
+		}
+		
+		if (mUpdatingFeed) {
+			mFeedItems.clear();
+			mUpdatingFeed = false;
 		}
         
 		mFeedItems.addAll(feedItems);

@@ -6,6 +6,7 @@ import ru.ok.android.sdk.OkTokenRequestListener;
 import ru.ok.android.sdk.util.OkScope;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -129,8 +130,10 @@ public class LoginFragment extends SherlockFragment {
 			public void onSuccess(String accessToken) {
 				//Toast.makeText(mContext, "Recieved new token : " + accessToken, Toast.LENGTH_LONG).show();
 				Log.i(TAG, "Recieved new token: " + accessToken);
-				mCallbacks.onAuthComplete();
-				//startFeedActivity();
+				//mCallbacks.onAuthComplete();
+				Intent intent = new Intent(getSherlockActivity(), MainActivity.class);
+				startActivity(intent);
+				getSherlockActivity().finish();
 			}
 
 			@Override
@@ -176,6 +179,7 @@ public class LoginFragment extends SherlockFragment {
 			//startFeedActivity();
 			//Toast.makeText(mContext, "Launch feed", Toast.LENGTH_SHORT).show();
 			mCallbacks.onAuthComplete();
+			
 		}
 	}
 	

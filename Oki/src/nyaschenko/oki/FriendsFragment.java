@@ -122,6 +122,7 @@ public class FriendsFragment extends SherlockFragment {
 		if (!mHasMore || mLoadingMore) {
 			return;
 		}
+		//getSherlockActivity().setSupportProgressBarIndeterminateVisibility(true);
 		mLoadingMore = true;
 		ApiRequest request = new ApiRequest("friends.get");
 		mApiThread.queueRequest(REQUEST_GET_FRIENDS, request);
@@ -131,6 +132,7 @@ public class FriendsFragment extends SherlockFragment {
 		if (!mHasMore || mLoadingMore) {
 			return;
 		}
+		//getSherlockActivity().setSupportProgressBarIndeterminateVisibility(true);
 		mLoadingMore = true;
 		HashMap<String, String> params = new HashMap<String, String>();
 		StringBuilder b = new StringBuilder();
@@ -143,12 +145,12 @@ public class FriendsFragment extends SherlockFragment {
 				b.append(",");
 			}
 		}
-		mFriendsInfoLoaded += count;
 		if (count == 0) {
 			mHasMore = false;
 			mLoadingMore = false;
 			return;
 		}
+		mFriendsInfoLoaded += count;
 		params.put("uids", b.toString());
 		params.put("count", Integer.toString(count));
 		params.put("fields", "first_name,last_name,pic128x128");
@@ -161,6 +163,7 @@ public class FriendsFragment extends SherlockFragment {
         mApiThread.setListener(new ApiFetcher.Listener<String>() {
 
 			public void onRequestComplete(String token, String result) {
+				//getSherlockActivity().setSupportProgressBarIndeterminateVisibility(false);
 				Log.i(TAG, "Recieved response for request[" + token + "]: " + result);
 				if (isVisible()) {
 					if (token.equals(REQUEST_GET_FRIENDS)) {
@@ -197,7 +200,6 @@ public class FriendsFragment extends SherlockFragment {
 			mAdapter.notifyDataSetChanged();
 		}
 		mLoadingMore = false;
-		
 	}
 
 	private void parseFriends(String response) {
