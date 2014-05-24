@@ -302,12 +302,12 @@ public final class R {
 		public static final int aviary_hint_foreground_light = 0x7f08000b;
 		public static final int aviary_hint_foreground_light_inverted = 0x7f08001e;
 		public static final int aviary_iap_background = 0x7f080029;
-		public static final int aviary_iap_buy_button_text_color = 0x7f080044;
+		public static final int aviary_iap_buy_button_text_color = 0x7f080046;
 		public static final int aviary_iap_cell_layout_background = 0x7f080028;
 		public static final int aviary_iap_link_color_normal = 0x7f08001f;
 		public static final int aviary_iap_link_color_pressed = 0x7f080021;
 		public static final int aviary_iap_link_color_selected = 0x7f080020;
-		public static final int aviary_iap_link_text_color = 0x7f080045;
+		public static final int aviary_iap_link_text_color = 0x7f080047;
 		public static final int aviary_iap_list_divider = 0x7f080022;
 		public static final int aviary_iap_restore_all_button_color = 0x7f080023;
 		public static final int aviary_iap_workspace_background = 0x7f080024;
@@ -333,9 +333,9 @@ public final class R {
 		public static final int aviary_primary_highlight_color_muted = 0x7f080013;
 		public static final int aviary_text_highlight_background_inner_pressed = 0x7f08003f;
 		public static final int aviary_text_highlight_background_normal = 0x7f08003e;
-		public static final int aviary_tool_text_color = 0x7f080046;
-		public static final int aviary_tool_text_color_inverted = 0x7f080047;
-		public static final int aviary_tool_text_color_no_selected = 0x7f080048;
+		public static final int aviary_tool_text_color = 0x7f080048;
+		public static final int aviary_tool_text_color_inverted = 0x7f080049;
+		public static final int aviary_tool_text_color_no_selected = 0x7f08004a;
 		public static final int aviary_workspace_indicator_normal_endColor = 0x7f080018;
 		public static final int aviary_workspace_indicator_normal_startColor = 0x7f080017;
 		public static final int aviary_workspace_indicator_selected_endColor = 0x7f080016;
@@ -673,7 +673,7 @@ public final class R {
 		public static final int normal = 0x7f060001;
 		public static final int pressed = 0x7f060016;
 		public static final int selected = 0x7f060018;
-		public static final int shadow = 0x7f0600b8;
+		public static final int shadow = 0x7f0600bb;
 		public static final int size_preview = 0x7f0600a4;
 		public static final int text = 0x7f06005b;
 		public static final int text1 = 0x7f060090;

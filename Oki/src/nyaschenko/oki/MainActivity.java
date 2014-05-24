@@ -1,5 +1,6 @@
 package nyaschenko.oki;
 
+import ru.ok.android.sdk.Odnoklassniki;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -14,25 +15,36 @@ import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
 
 public class MainActivity extends SlidingFragmentActivity
 		implements LoginFragment.Callbacks,
-				   PhotosFragment.Callbacks,
 				   MenuFragment.Callbacks,
-				   FriendsFragment.Callbacks {
+				   FriendsListFragment.Callbacks {
 	
-	public static final String TAG = "MainActivity";
+	private static final String TAG = "MainActivity";
+	
+	
+	private static final String APP_ID = "572588032";
+	private static final String APP_SECRET = "31F3E52DE4ECD8D56AB6FE06";
+	private static final String APP_KEY = "CBABACCDCBABABABA";
+	private static final String STATE_CURRENT_FRAGMENT = "STATE_CURRENT_FRAGMENT";
+	private static final int FRAGMENT_FEED = 0;
+	private static final int FRAGMENT_PHOTOS = 1;
+	private static final int FRAGMENT_FRIENDS = 2;
+	private static final int ACTIVITY_SETTINGS = 3;
+	
+	private int mCurrentFragment;
 
 	private SlidingMenu menu;
-	// TODO: extract from getCurrentUser response
-	private static String mCurrentUserId = "561704502428";
-	private static int mCurrentFragment;
+	private static String mCurrentUserId;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        Odnoklassniki.createInstance(this, APP_ID, APP_SECRET, APP_KEY);
+        while (!Odnoklassniki.hasInstance()) {}
         
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		setSupportProgressBarIndeterminateVisibility(true);
@@ -48,7 +60,7 @@ public class MainActivity extends SlidingFragmentActivity
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		//outState.putInt(STATE_CURRENT_FRAGMENT, mCurrentFragment);
+		outState.putInt(STATE_CURRENT_FRAGMENT, mCurrentFragment);
 	}
 
 	private void initFragments(Bundle savedInstanceState) {
@@ -79,23 +91,16 @@ public class MainActivity extends SlidingFragmentActivity
 		menu.setTouchModeBehind(SlidingMenu.TOUCHMODE_MARGIN);
 		//menu.setShadowDrawable(R.drawable.slidemenu_shadowgradient);
 		menu.setShadowWidth(50); //15
-		menu.setFadeDegree(0.75f); //0.0f
-		//menu.attachToActivity(this, SlidingMenu.SLIDING_WINDOW);
+		menu.setFadeDegree(0.75f);
 		menu.setBehindOffset((int) getResources().getDimension(R.dimen.slidingmenu_offset)); //100
 		menu.setSlidingEnabled(false);
 	}
 	
 	private void initUIL() {
-		/*
-		 * TODO: check if display options are local or global for every .displayImage(...) call
-		 * see here: https://github.com/nostra13/Android-Universal-Image-Loader/wiki/Display-Options
-		 * 
-		 */
-		
 		DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
         .cacheInMemory(true)
         .cacheOnDisc(true)
-        //.displayer(new FadeInBitmapDisplayer(250))
+        .showStubImage(R.drawable.solid_white)
         .build();
 		
 		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
@@ -111,10 +116,9 @@ public class MainActivity extends SlidingFragmentActivity
 		getSlidingMenu().setSlidingEnabled(true);
 		setSupportProgressBarIndeterminateVisibility(false);
 		
-		
 		FragmentManager fm = getSupportFragmentManager();
 		fm.beginTransaction()
-				.replace(R.id.fragmentContainerMain, new FeedFragment())
+				.replace(R.id.fragmentContainerMain, new FeedListFragment())
 				.commit();
 		mCurrentFragment = 0;
 		
@@ -126,29 +130,21 @@ public class MainActivity extends SlidingFragmentActivity
 			getSlidingMenu().showContent();
 			return;
 		}
-		SherlockFragment newFragment = null;
-		//newFragment = PhotosFragment.newInstance(mCurrentUserId);
+		SherlockListFragment newListFragment = null;
 		
 		switch (index) {
-			case 0:
-				newFragment = new FeedFragment();
+			case FRAGMENT_FEED:
+				newListFragment = new FeedListFragment();
 				break;
-			case 1:
-				// TODO: add id in Bundle
-				//PhotosFragment f = PhotosFragment.newInstance(mCurrentUserId);
-				newFragment = new PhotosFragment();
-				//newFragment = new FeedFragment();
+			case FRAGMENT_PHOTOS:
+				newListFragment = new PhotosListFragment();
 				break;
-			case 2:
-				newFragment = new FriendsFragment();
+			case FRAGMENT_FRIENDS:
+				newListFragment = new FriendsListFragment();
 				break;
-			case 3:
-				// TODO: Settings Activity
-				//newFragment = PhotosFragment.newInstance("564168749025");
+			case ACTIVITY_SETTINGS:
 				Intent intent = new Intent(this, SettingsActivity.class);
 				startActivity(intent);
-				//newFragment = new FeedFragment();
-				//break;
 				return;
 			default:
 				Log.e(TAG, "Unknown menu option index: " + index);
@@ -156,10 +152,10 @@ public class MainActivity extends SlidingFragmentActivity
 		}
 		
 		mCurrentFragment = index;
-		if (newFragment != null) {
+		if (newListFragment != null) {
 			FragmentManager fm = getSupportFragmentManager();
 			FragmentTransaction tr = fm.beginTransaction();
-			tr.replace(R.id.fragmentContainerMain, newFragment).commit();
+			tr.replace(R.id.fragmentContainerMain, newListFragment).commit();
 		}
 		getSlidingMenu().showContent();
 	}
@@ -173,8 +169,8 @@ public class MainActivity extends SlidingFragmentActivity
 	public void onFriendSelected(String id) {
 		FragmentManager fm = getSupportFragmentManager();
 		FragmentTransaction tr = fm.beginTransaction();
-		tr.replace(R.id.fragmentContainerMain, PhotosFragment.newInstance(id));
-		//tr.addToBackStack(null);
+		tr.replace(R.id.fragmentContainerMain, PhotosListFragment.newInstance(id));
+		tr.addToBackStack(null);
 		tr.commit();
 		mCurrentFragment = 5;
 	}

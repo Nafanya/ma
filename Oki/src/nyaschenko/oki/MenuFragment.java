@@ -2,8 +2,6 @@ package nyaschenko.oki;
 
 import java.util.ArrayList;
 
-import nyaschenko.oki.LoginFragment.Callbacks;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,7 +11,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockListFragment;
 
@@ -30,7 +27,6 @@ public class MenuFragment extends SherlockListFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		// TODO: add string resources
 		ArrayList<MenuEntry> entries = new ArrayList<MenuEntry>();
 		entries.add(new MenuEntry(getString(R.string.feed), R.drawable.ic_action_chat));
 		entries.add(new MenuEntry(getString(R.string.my_photos), R.drawable.ic_action_camera));
@@ -42,18 +38,6 @@ public class MenuFragment extends SherlockListFragment {
 	}
 	
 	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
-		mCallbacks = (Callbacks) activity;
-	}
-	
-	@Override
-	public void onDetach() {
-		super.onDetach();
-		mCallbacks = null;
-	}
-	
-	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.menu_list, container, false);
@@ -61,7 +45,6 @@ public class MenuFragment extends SherlockListFragment {
 	
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		//Toast.makeText(getSherlockActivity(), "Position " + position + " clicked", Toast.LENGTH_SHORT).show();
 		mCallbacks.onMenuItemSelected(position);
 	}
 	
@@ -89,6 +72,18 @@ public class MenuFragment extends SherlockListFragment {
 			return convertView;
 		}
 		
+	}
+	
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		mCallbacks = (Callbacks) activity;
+	}
+	
+	@Override
+	public void onDetach() {
+		super.onDetach();
+		mCallbacks = null;
 	}
 	
 	private class MenuEntry {

@@ -48,12 +48,9 @@ public class ApiFetcher<Token> extends HandlerThread {
 		while (mHandler == null) {
 			// As fragment was just created, need a little more time for mHandler to set
 		}
-		if (mHandler != null && requestMap != null) {
-			requestMap.put(token, request);
-			mHandler.obtainMessage(MESSAGE_API_REQUEST, token).sendToTarget();
-		} else {
-			Log.e(TAG, "mHandler in null: " + (mHandler == null));
-		}
+		requestMap.put(token, request);
+		mHandler.obtainMessage(MESSAGE_API_REQUEST, token).sendToTarget();
+		
 	}
 	
 	@Override
@@ -82,15 +79,27 @@ public class ApiFetcher<Token> extends HandlerThread {
 			if (request == null)
 				return;
 		
-			final String response;
-			response = mOdnoklassniki.request(request.getMethod(), request.getParams(), "get");
+			
+			String tempResponse = mOdnoklassniki.request(request.getMethod(), request.getParams(), "get");
+			while (tempResponse.contains("PARAM_SESSION_EXPIRED")) {
+				mOdnoklassniki.refreshToken(mContext);
+				tempResponse = mOdnoklassniki.request(request.getMethod(), request.getParams(), "get");
+			}
+			final String response = tempResponse;
 			
 			mResponseHandler.post(new Runnable() {
 				public void run() {
 					if (!requestMap.get(token).equals(request)) {
 						return;
 					}
-					
+					/*
+					if (request.getMethod().equals("users.getInfo")) {
+						try {
+							Thread.sleep(2000);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}*/
 					requestMap.remove(token);
 					mListener.onRequestComplete(token, response);
 				}

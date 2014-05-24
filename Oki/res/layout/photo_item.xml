@@ -1,68 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    android:background="@color/background_light_grey" >
     
-    <ImageView
-        android:contentDescription="@null"
-	    android:id="@+id/photo_item_imageView"
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:layout_gravity="center"
-	    android:scaleType="centerCrop" />
+    <!-- android:background="@color/abs__background_holo_light" -->
     
-    <TextView 
-        android:id="@+id/photo_item_text"
+   	<RelativeLayout
         android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:layout_below="@id/photo_item_imageView" />
+    	android:layout_height="wrap_content"
+    	android:layout_margin="5dp"
+    	android:padding="5dp"
+    	android:background="@color/background_white" >
     
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/photo_item_text"
-        android:orientation="horizontal" >
-    
-	    <ImageView 
-	        android:layout_width="0dp"
-	        android:layout_weight="1"
-	    	android:layout_height="match_parent" 
-	    	android:contentDescription="@null"
-	    	android:src="@drawable/ic_action_good"
-	    	android:layout_gravity="left"
-	    	android:gravity="center" />
-	       
-	    <TextView 
-	        android:id="@+id/photo_item_likeCount"
-	        android:layout_width="0dp"
-	        android:layout_weight="1"
-	    	android:layout_height="match_parent"
-	    	android:layout_gravity="left"
-	    	android:gravity="center" />
+	    <ImageView
+	        android:contentDescription="@null"
+		    android:id="@+id/photo_item_imageView"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:minHeight="200dp"
+		    android:paddingLeft="5dp"
+		    android:paddingRight="5dp"
+		    android:paddingBottom="5dp"
+		    android:scaleType="centerCrop" />
 	    
 	    <TextView 
-	        android:layout_width="0dp"
-	        android:layout_weight="6"
-	    	android:layout_height="match_parent"
-	    	android:gravity="center" />
-	       
-	   	<ImageView 
-	        android:layout_width="0dp"
-	        android:layout_weight="1"
-	    	android:layout_height="match_parent" 
-	    	android:contentDescription="@null"
-	    	android:src="@drawable/ic_action_chat"
-	    	android:layout_gravity="right"
-	    	android:gravity="center" />
-	      	
-	   	 <TextView 
-	        android:id="@+id/photo_item_commentCount"
-	        android:layout_width="0dp"
-	        android:layout_weight="1"
-	    	android:layout_height="match_parent"
-	    	android:layout_gravity="right"
-	    	android:gravity="center" />
+	        android:id="@+id/photo_item_text"
+	        android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_below="@id/photo_item_imageView" />
+
+	    <LinearLayout
+	        android:id="@+id/widgets_container"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/photo_item_text"
+	        android:orientation="horizontal" >
+	    
+		    <ImageView 
+		        android:layout_width="0dp"
+		        android:layout_weight="1"
+		    	android:layout_height="match_parent" 
+		    	android:contentDescription="@null"
+		    	android:src="@drawable/ic_action_good"
+		    	android:layout_gravity="left"
+		    	android:gravity="center" />
+		       
+		    <TextView 
+		        android:id="@+id/photo_item_likeCount"
+		        android:layout_width="0dp"
+		        android:layout_weight="1"
+		    	android:layout_height="match_parent"
+		    	android:layout_gravity="left"
+		    	android:gravity="center" />
+		    
+		    <TextView 
+		        android:layout_width="0dp"
+		        android:layout_weight="6"
+		    	android:layout_height="match_parent"
+		    	android:gravity="center" />
+		       
+		   	<ImageView 
+		        android:layout_width="0dp"
+		        android:layout_weight="1"
+		    	android:layout_height="match_parent" 
+		    	android:contentDescription="@null"
+		    	android:src="@drawable/ic_action_chat"
+		    	android:layout_gravity="right"
+		    	android:gravity="center" />
+		      	
+		   	 <TextView 
+		        android:id="@+id/photo_item_commentCount"
+		        android:layout_width="0dp"
+		        android:layout_weight="1"
+		    	android:layout_height="match_parent"
+		    	android:layout_gravity="right"
+		    	android:gravity="center" />
+	   	 
+	   	 </LinearLayout>
    	 
-   	 </LinearLayout>
+    </RelativeLayout>
            
-</RelativeLayout>
+</LinearLayout>

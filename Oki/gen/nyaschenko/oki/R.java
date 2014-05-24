@@ -2420,10 +2420,10 @@ containing a value of this type.
         public static final int abs__bright_foreground_disabled_holo_light=0x7f080005;
         public static final int abs__bright_foreground_holo_dark=0x7f080002;
         public static final int abs__bright_foreground_holo_light=0x7f080003;
-        public static final int abs__primary_text_disable_only_holo_dark=0x7f080040;
-        public static final int abs__primary_text_disable_only_holo_light=0x7f080041;
-        public static final int abs__primary_text_holo_dark=0x7f080042;
-        public static final int abs__primary_text_holo_light=0x7f080043;
+        public static final int abs__primary_text_disable_only_holo_dark=0x7f080042;
+        public static final int abs__primary_text_disable_only_holo_light=0x7f080043;
+        public static final int abs__primary_text_holo_dark=0x7f080044;
+        public static final int abs__primary_text_holo_light=0x7f080045;
         public static final int aviary_adjust_fill_color=0x7f08003b;
         public static final int aviary_adjust_internal_stroke_color=0x7f08003a;
         /**  
@@ -2470,14 +2470,14 @@ containing a value of this type.
         /**  iap dialog main color background 
          */
         public static final int aviary_iap_background=0x7f080029;
-        public static final int aviary_iap_buy_button_text_color=0x7f080044;
+        public static final int aviary_iap_buy_button_text_color=0x7f080046;
         /**  iap dialog cell layout background 
          */
         public static final int aviary_iap_cell_layout_background=0x7f080028;
         public static final int aviary_iap_link_color_normal=0x7f08001f;
         public static final int aviary_iap_link_color_pressed=0x7f080021;
         public static final int aviary_iap_link_color_selected=0x7f080020;
-        public static final int aviary_iap_link_text_color=0x7f080045;
+        public static final int aviary_iap_link_text_color=0x7f080047;
         public static final int aviary_iap_list_divider=0x7f080022;
         public static final int aviary_iap_restore_all_button_color=0x7f080023;
         public static final int aviary_iap_workspace_background=0x7f080024;
@@ -2524,13 +2524,15 @@ containing a value of this type.
  highlight drawable background, stroke color 
          */
         public static final int aviary_text_highlight_background_normal=0x7f08003e;
-        public static final int aviary_tool_text_color=0x7f080046;
-        public static final int aviary_tool_text_color_inverted=0x7f080047;
-        public static final int aviary_tool_text_color_no_selected=0x7f080048;
+        public static final int aviary_tool_text_color=0x7f080048;
+        public static final int aviary_tool_text_color_inverted=0x7f080049;
+        public static final int aviary_tool_text_color_no_selected=0x7f08004a;
         public static final int aviary_workspace_indicator_normal_endColor=0x7f080018;
         public static final int aviary_workspace_indicator_normal_startColor=0x7f080017;
         public static final int aviary_workspace_indicator_selected_endColor=0x7f080016;
         public static final int aviary_workspace_indicator_selected_startColor=0x7f080015;
+        public static final int background_light_grey=0x7f080040;
+        public static final int background_white=0x7f080041;
     }
     public static final class dimen {
         /**  Default height of an action bar. 
@@ -2804,6 +2806,7 @@ containing a value of this type.
          */
         public static final int aviary_wheel_margin_horizontal=0x7f090027;
         public static final int list_padding=0x7f090057;
+        public static final int listview_divider_height=0x7f090059;
         public static final int shadow_width=0x7f090058;
         public static final int slidingmenu_offset=0x7f090056;
     }
@@ -3086,6 +3089,7 @@ containing a value of this type.
         public static final int icon=0x7f020113;
         public static final int image=0x7f020114;
         public static final int sample=0x7f020115;
+        public static final int solid_white=0x7f020116;
     }
     public static final class id {
         public static final int abs__action_bar=0x7f060033;
@@ -3127,9 +3131,9 @@ containing a value of this type.
         public static final int abs__textButton=0x7f060026;
         public static final int abs__title=0x7f06002e;
         public static final int abs__up=0x7f06000b;
-        public static final int action_addPhoto=0x7f0600bb;
-        public static final int action_refresh=0x7f0600ba;
-        public static final int action_settings=0x7f0600b9;
+        public static final int action_addPhoto=0x7f0600be;
+        public static final int action_refresh=0x7f0600bd;
+        public static final int action_settings=0x7f0600bc;
         public static final int alwaysScroll=0x7f060022;
         public static final int aviary_badge=0x7f060058;
         public static final int aviary_banner_text=0x7f060066;
@@ -3203,7 +3207,7 @@ containing a value of this type.
         public static final int button1=0x7f06008f;
         public static final int button2=0x7f060091;
         public static final int button3=0x7f060093;
-        public static final int buttonLogin=0x7f0600a9;
+        public static final int buttonLogin=0x7f0600ab;
         public static final int checked=0x7f060017;
         public static final int disableHome=0x7f060009;
         public static final int disabled=0x7f060021;
@@ -3220,10 +3224,10 @@ containing a value of this type.
         public static final int feedItem_imageView=0x7f0600a7;
         public static final int feedItem_textViewDate=0x7f0600a5;
         public static final int feedItem_textViewMessage=0x7f0600a6;
-        public static final int fragmentContainerMain=0x7f0600aa;
-        public static final int fragmentContainerMenu=0x7f0600ab;
-        public static final int friendItem_imageView=0x7f0600ac;
-        public static final int friendItem_textView=0x7f0600ad;
+        public static final int fragmentContainerMain=0x7f0600ac;
+        public static final int fragmentContainerMenu=0x7f0600ad;
+        public static final int friendItem_imageView=0x7f0600ae;
+        public static final int friendItem_textView=0x7f0600af;
         public static final int fullscreen=0x7f060013;
         public static final int homeAsUp=0x7f060006;
         public static final int horizontal=0x7f060020;
@@ -3233,13 +3237,13 @@ containing a value of this type.
         public static final int imagegl=0x7f06004e;
         public static final int left=0x7f060010;
         public static final int listMode=0x7f060002;
-        public static final int listView=0x7f0600a8;
-        public static final int list_item_menu=0x7f0600ae;
+        public static final int listView=0x7f0600aa;
+        public static final int list_item_menu=0x7f0600b0;
         public static final int main_content=0x7f060078;
         public static final int margin=0x7f060012;
-        public static final int menu_image=0x7f0600b1;
-        public static final int menu_sliding_entry_icon=0x7f0600af;
-        public static final int menu_sliding_entry_text=0x7f0600b0;
+        public static final int menu_image=0x7f0600b3;
+        public static final int menu_sliding_entry_icon=0x7f0600b1;
+        public static final int menu_sliding_entry_text=0x7f0600b2;
         public static final int navbar_button1=0x7f060082;
         public static final int navbar_button2=0x7f060086;
         public static final int navbar_button3=0x7f060087;
@@ -3252,31 +3256,34 @@ containing a value of this type.
         public static final int nonblank=0x7f06005a;
         public static final int none=0x7f060014;
         public static final int normal=0x7f060001;
-        public static final int photo_item_commentCount=0x7f0600b5;
-        public static final int photo_item_imageView=0x7f0600b2;
-        public static final int photo_item_likeCount=0x7f0600b4;
-        public static final int photo_item_text=0x7f0600b3;
+        public static final int photo_item_commentCount=0x7f0600b8;
+        public static final int photo_item_imageView=0x7f0600b4;
+        public static final int photo_item_likeCount=0x7f0600b7;
+        public static final int photo_item_text=0x7f0600b5;
         public static final int pressed=0x7f060016;
+        public static final int progressBar=0x7f0600a8;
         public static final int right=0x7f060011;
-        public static final int scaleImageView=0x7f0600b6;
+        public static final int scaleImageView=0x7f0600b9;
         public static final int selected=0x7f060018;
         public static final int selected_view=0x7f060015;
-        public static final int shadow=0x7f0600b8;
+        public static final int shadow=0x7f0600bb;
         public static final int showCustom=0x7f060008;
         public static final int showHome=0x7f060005;
         public static final int showTitle=0x7f060007;
         public static final int size_preview=0x7f0600a4;
-        public static final int slidingmenumain=0x7f0600b7;
-        public static final int submenu_action_pickFromGallery=0x7f0600bd;
-        public static final int submenu_action_takePhoto=0x7f0600bc;
+        public static final int slidingmenumain=0x7f0600ba;
+        public static final int submenu_action_pickFromGallery=0x7f0600c0;
+        public static final int submenu_action_takePhoto=0x7f0600bf;
         public static final int tabMode=0x7f060003;
         public static final int text=0x7f06005b;
         public static final int text1=0x7f060090;
         public static final int text2=0x7f060092;
         public static final int text3=0x7f060094;
+        public static final int textView=0x7f0600a9;
         public static final int top_down=0x7f060019;
         public static final int useLogo=0x7f060004;
         public static final int vertical=0x7f06001f;
+        public static final int widgets_container=0x7f0600b6;
         public static final int wrap_content=0x7f060000;
     }
     public static final class integer {
@@ -3515,22 +3522,24 @@ containing a value of this type.
         public static final int aviary_tool_feedback_layout=0x7f030052;
         public static final int aviary_tool_layout=0x7f030053;
         public static final int feed_item=0x7f030054;
-        public static final int fragment_feed=0x7f030055;
-        public static final int fragment_friends=0x7f030056;
-        public static final int fragment_login=0x7f030057;
-        public static final int fragment_main=0x7f030058;
-        public static final int fragment_menu=0x7f030059;
-        public static final int fragment_photos=0x7f03005a;
-        public static final int friend_item=0x7f03005b;
-        public static final int main=0x7f03005c;
-        public static final int menu_list=0x7f03005d;
-        public static final int menu_sliding_entry=0x7f03005e;
-        public static final int menu_slidingmenu=0x7f03005f;
-        public static final int photo_item=0x7f030060;
-        public static final int scaledimage_activity=0x7f030061;
-        public static final int sherlock_spinner_dropdown_item=0x7f030062;
-        public static final int sherlock_spinner_item=0x7f030063;
-        public static final int slidingmenumain=0x7f030064;
+        public static final int footer_progress=0x7f030055;
+        public static final int fragment_feed=0x7f030056;
+        public static final int fragment_friends=0x7f030057;
+        public static final int fragment_login=0x7f030058;
+        public static final int fragment_main=0x7f030059;
+        public static final int fragment_menu=0x7f03005a;
+        public static final int fragment_photos=0x7f03005b;
+        public static final int friend_item=0x7f03005c;
+        public static final int main=0x7f03005d;
+        public static final int menu_list=0x7f03005e;
+        public static final int menu_sliding_entry=0x7f03005f;
+        public static final int menu_slidingmenu=0x7f030060;
+        public static final int photo_item=0x7f030061;
+        public static final int scaledimage_activity=0x7f030062;
+        public static final int sherlock_spinner_dropdown_item=0x7f030063;
+        public static final int sherlock_spinner_item=0x7f030064;
+        public static final int slidingmenumain=0x7f030065;
+        public static final int thread_list_fragment=0x7f030066;
     }
     public static final class menu {
         public static final int login=0x7f0e0000;
@@ -3765,10 +3774,12 @@ containing a value of this type.
         public static final int menu_takePhoto=0x7f0b00b9;
         public static final int menu_titlePickPhoto=0x7f0b00ba;
         public static final int my_photos=0x7f0b00c0;
+        public static final int photo_create_error=0x7f0b00c4;
         public static final int photo_upload_failed=0x7f0b00c3;
         public static final int photo_upload_successful=0x7f0b00c2;
         public static final int photo_uploading=0x7f0b00c1;
         public static final int photos=0x7f0b00bf;
+        public static final int sd_card_unavailable=0x7f0b00c5;
         public static final int select_picture=0x7f0b00bb;
         public static final int settings=0x7f0b00be;
     }

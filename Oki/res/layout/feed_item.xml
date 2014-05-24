@@ -3,13 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_margin="10dp" >
+    android:padding="5dp"
+    android:background="@color/background_light_grey" >
     
     <RelativeLayout 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/abs__background_holo_light"
-       	android:padding="10dp" >
+        android:background="@color/background_white"
+       	android:padding="5dp"
+       	android:layout_margin="5dp" >
     
          <TextView
 	        android:id="@+id/feedItem_textViewDate"

@@ -8,5 +8,8 @@
     <dimen name="list_padding">10dp</dimen>
     <dimen name="shadow_width">15dp</dimen>
     
-
+    
+    <dimen name="listview_divider_height">0dp</dimen>
+    
+    
 </resources>

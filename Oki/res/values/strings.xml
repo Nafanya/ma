@@ -25,5 +25,8 @@
     <string name="photo_upload_successful">Фотография загружена</string>
     <string name="photo_upload_failed">Ошибка при загрузке фотографии</string>
     
+    <string name="photo_create_error">Не удалось создать файл для снимка</string>
+    <string name="sd_card_unavailable">SD карта не доступна</string>
+    
 
 </resources>
