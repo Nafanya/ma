@@ -91,7 +91,7 @@ public class MainActivity extends SlidingFragmentActivity
 		menu.setTouchModeBehind(SlidingMenu.TOUCHMODE_MARGIN);
 		//menu.setShadowDrawable(R.drawable.slidemenu_shadowgradient);
 		menu.setShadowWidth(50); //15
-		menu.setFadeDegree(0.75f);
+		menu.setFadeDegree(0f);
 		menu.setBehindOffset((int) getResources().getDimension(R.dimen.slidingmenu_offset)); //100
 		menu.setSlidingEnabled(false);
 	}

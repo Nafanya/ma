@@ -28,10 +28,10 @@ public class MenuFragment extends SherlockListFragment {
 		super.onCreate(savedInstanceState);
 		
 		ArrayList<MenuEntry> entries = new ArrayList<MenuEntry>();
-		entries.add(new MenuEntry(getString(R.string.feed), R.drawable.ic_action_chat));
-		entries.add(new MenuEntry(getString(R.string.my_photos), R.drawable.ic_action_camera));
-		entries.add(new MenuEntry(getString(R.string.friends), R.drawable.ic_action_group));
-		entries.add(new MenuEntry(getString(R.string.settings), R.drawable.ic_action_settings));
+		entries.add(new MenuEntry(getString(R.string.feed), R.drawable.ic_action_chat_white));
+		entries.add(new MenuEntry(getString(R.string.my_photos), R.drawable.ic_action_camera_white));
+		entries.add(new MenuEntry(getString(R.string.friends), R.drawable.ic_action_group_white));
+		entries.add(new MenuEntry(getString(R.string.settings), R.drawable.ic_action_settings_white));
 		
 		MenuAdapter adapter = new MenuAdapter(entries);
 		setListAdapter(adapter);

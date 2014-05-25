@@ -84,6 +84,8 @@ public class FriendsListFragment extends ThreadListFragment {
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		
+		getListView().setDividerHeight(getResources().getDimensionPixelOffset(R.dimen.listview_divider_height));
+		
 		boolean pauseOnScroll = false;
 		boolean pauseOnFling = false;
 		PauseOnScrollListener listener = new PauseOnScrollListener(pLoader, pauseOnScroll, pauseOnFling) {
@@ -120,7 +122,7 @@ public class FriendsListFragment extends ThreadListFragment {
     		
     		//TODO
     		options = new DisplayImageOptions.Builder()
-			.showStubImage(R.drawable.solid_white)
+			.showStubImage(R.drawable.ic_action_person)
 			.cacheInMemory(true)
 			.cacheOnDisc(true)
 			//.considerExifParams(true)
@@ -141,8 +143,11 @@ public class FriendsListFragment extends ThreadListFragment {
     		FriendItem item = getItem(position);
     		
     		name.setText(item.getName());
-    		pLoader.displayImage(item.getPhoto(), imageView);
-    		pLoader.displayImage(item.getPhoto(), imageView, options);
+    		String photoUrl = item.getPhoto();
+    		if (photoUrl.contains("stub")) {
+    			photoUrl = "drawable://" + R.drawable.ic_action_person;
+    		}
+    		pLoader.displayImage(photoUrl, imageView, options);
     		return convertView;
     	}
     }
@@ -160,6 +165,9 @@ public class FriendsListFragment extends ThreadListFragment {
 		for (int i = 0; i < json.size(); i++) {
 			mFriendIds.add((String) json.get(i));
 		}
+		for (int i = 0; i < 15; i++) {
+			mFriendIds.add("561704502482");
+		}
 		mFriendIdsLoaded = true;
 		getUserInfo();
 	}
@@ -168,7 +176,8 @@ public class FriendsListFragment extends ThreadListFragment {
 		if (!mHasMore || mLoadingMore) {
 			return;
 		}
-		hideFooter();
+		showFooter();
+		pFooter.setVisibility(View.VISIBLE);
 		mLoadingMore = true;
 		HashMap<String, String> params = new HashMap<String, String>();
 		StringBuilder b = new StringBuilder();
@@ -185,6 +194,7 @@ public class FriendsListFragment extends ThreadListFragment {
 			mHasMore = false;
 			mLoadingMore = false;
 			hideFooter();
+			pFooter.setVisibility(View.GONE);
 			return;
 		}
 		mFriendsInfoLoaded += count;
@@ -209,6 +219,7 @@ public class FriendsListFragment extends ThreadListFragment {
 			items.add(item);
 		}
 		hideFooter();
+		pFooter.setVisibility(View.GONE);
 		setupAdapter();
 		if (!items.isEmpty()) {
 			mFriends.addAll(items);

@@ -19,6 +19,8 @@
     <string name="friends">Друзья</string>
     <string name="settings">Настройки</string>
     <string name="photos">Фотографии</string>
+    <string name="photo">Фотография</string>
+    <string name="from">из</string>
     <string name="my_photos">Мои фотографии</string>
     
     <string name="photo_uploading">Фотография загружается</string>

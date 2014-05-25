@@ -2,6 +2,8 @@
 <resources>
     
     <color name="background_light_grey">#DCDCDC</color>
+    <color name="background_dark_grey">#4D4D4D</color>
     <color name="background_white">#FFFFFF</color>
+    <color name="background_black">#000000</color>
     
 </resources>

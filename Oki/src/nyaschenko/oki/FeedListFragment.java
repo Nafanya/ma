@@ -16,6 +16,7 @@ import nyaschenko.oki.utils.ApiRequest;
 import nyaschenko.oki.utils.BaseAlbumDirFactory;
 import nyaschenko.oki.utils.FeedItem;
 import nyaschenko.oki.utils.FroyoAlbumDirFactory;
+import nyaschenko.oki.utils.PhotoItem;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -146,9 +147,20 @@ public class FeedListFragment extends ThreadListFragment {
         getListView().setOnItemClickListener(new OnItemClickListener() {
 	        @Override
 	        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+	        	/*
 	            Intent intent = new Intent(getSherlockActivity(), ScaleImageViewActivity.class);
 	            intent.putExtra(EXTRA_IMAGE_URL, mFeedItems.get(position).getLargePhotos().get(0));
 	            startActivity(intent);
+	            */
+	        	ArrayList<String> photos = mFeedItems.get(position).getLargePhotos();
+	        	StringBuilder b = new StringBuilder();
+	        	for (String s : photos) {
+	        		b.append(s);
+	        		b.append('$');
+	        	}
+	        	Intent intent = new Intent(getSherlockActivity(), ImagePagerActivity.class);
+	        	intent.putExtra(EXTRA_IMAGE_URL, b.toString());
+	        	startActivity(intent);
 	        }
 	    });
 		

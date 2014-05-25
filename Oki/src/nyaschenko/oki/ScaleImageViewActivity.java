@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.view.Window;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class ScaleImageViewActivity extends SherlockActivity {
@@ -19,6 +18,8 @@ public class ScaleImageViewActivity extends SherlockActivity {
         super.onCreate(savedInstanceState);
         
         setContentView(R.layout.scaledimage_activity);
+        
+        getSupportActionBar().setTitle(getString(R.string.photo));
         
         ImageLoader loader = ImageLoader.getInstance();
         Intent intent = getIntent();

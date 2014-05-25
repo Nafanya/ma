@@ -8,15 +8,15 @@ package com.matabii.dev.scaleimageview;
 
 public final class R {
 	public static final class drawable {
-		public static final int icon = 0x7f020113;
-		public static final int image = 0x7f020114;
-		public static final int sample = 0x7f020115;
+		public static final int icon = 0x7f020118;
+		public static final int image = 0x7f020119;
+		public static final int sample = 0x7f02011a;
 	}
 	public static final class id {
-		public static final int image = 0x7f06004b;
+		public static final int image = 0x7f06004c;
 	}
 	public static final class layout {
-		public static final int main = 0x7f03005d;
+		public static final int main = 0x7f03005e;
 	}
 	public static final class string {
 		public static final int app_name = 0x7f0b000d;

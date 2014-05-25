@@ -44,7 +44,7 @@ public abstract class ThreadListFragment extends SherlockListFragment {
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		getListView().addFooterView(pFooter);
-		getListView().setDividerHeight(getResources().getDimensionPixelOffset(R.dimen.listview_divider_height));
+		getListView().setDividerHeight(getResources().getDimensionPixelOffset(R.dimen.listview_divider_height_zero));
 	}
 	
 	@Override
