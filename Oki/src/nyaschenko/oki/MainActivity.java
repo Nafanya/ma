@@ -3,6 +3,7 @@ package nyaschenko.oki;
 import ru.ok.android.sdk.Odnoklassniki;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -24,7 +25,7 @@ public class MainActivity extends SlidingFragmentActivity
 	
 	private static final String TAG = "MainActivity";
 	
-	
+	private static final String EXTRA_LOGGED_IN = "EXTRA_LOGGED_IN";
 	private static final String APP_ID = "572588032";
 	private static final String APP_SECRET = "31F3E52DE4ECD8D56AB6FE06";
 	private static final String APP_KEY = "CBABACCDCBABABABA";
@@ -38,10 +39,14 @@ public class MainActivity extends SlidingFragmentActivity
 
 	private SlidingMenu menu;
 	private static String mCurrentUserId;
+	private boolean mLoggedIn;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        Intent intent = getIntent();
+        mLoggedIn = intent.getBooleanExtra(EXTRA_LOGGED_IN, false);
         
         Odnoklassniki.createInstance(this, APP_ID, APP_SECRET, APP_KEY);
         while (!Odnoklassniki.hasInstance()) {}
@@ -65,13 +70,18 @@ public class MainActivity extends SlidingFragmentActivity
 
 	private void initFragments(Bundle savedInstanceState) {
 		FragmentManager manager = getSupportFragmentManager();
-        SherlockFragment mainFragment = 
-        		(SherlockFragment) manager.findFragmentById(R.id.fragmentContainerMain);
+        Fragment mainFragment = 
+        		(Fragment) manager.findFragmentById(R.id.fragmentContainerMain);
         SherlockListFragment menuFragment = 
-        			(SherlockListFragment) manager.findFragmentById(R.id.fragmentContainerMenu);
+        		(SherlockListFragment) manager.findFragmentById(R.id.fragmentContainerMenu);
 
         if (mainFragment == null) {
-        	mainFragment = new LoginFragment();
+        	if (mLoggedIn) {
+        		setSupportProgressBarIndeterminateVisibility(false);
+        		mainFragment = new FeedListFragment();
+        	} else {
+        		mainFragment = new LoginFragment();
+        	}
             manager.beginTransaction()
                 	.add(R.id.fragmentContainerMain, mainFragment)
                 	.commit();
@@ -89,18 +99,17 @@ public class MainActivity extends SlidingFragmentActivity
 		menu = getSlidingMenu();
 		menu.setMode(SlidingMenu.LEFT);
 		menu.setTouchModeBehind(SlidingMenu.TOUCHMODE_MARGIN);
-		//menu.setShadowDrawable(R.drawable.slidemenu_shadowgradient);
 		menu.setShadowWidth(50); //15
 		menu.setFadeDegree(0f);
 		menu.setBehindOffset((int) getResources().getDimension(R.dimen.slidingmenu_offset)); //100
-		menu.setSlidingEnabled(false);
+		menu.setSlidingEnabled(mLoggedIn);
 	}
 	
 	private void initUIL() {
 		DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
         .cacheInMemory(true)
         .cacheOnDisc(true)
-        .showStubImage(R.drawable.solid_white)
+        //	.showStubImage(R.drawable.solid_white)
         .build();
 		
 		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
@@ -120,7 +129,7 @@ public class MainActivity extends SlidingFragmentActivity
 		fm.beginTransaction()
 				.replace(R.id.fragmentContainerMain, new FeedListFragment())
 				.commit();
-		mCurrentFragment = 0;
+		mCurrentFragment = FRAGMENT_FEED;
 		
 	}
 

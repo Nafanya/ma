@@ -2,8 +2,11 @@ package nyaschenko.oki.utils;
 
 import java.util.ArrayList;
 
+import android.text.format.DateUtils;
+
 public class FeedItem {
 	private String message;
+	private long timeMillis;
 	private String date;
 	private ArrayList<String> largePhotos;
 	
@@ -15,6 +18,14 @@ public class FeedItem {
 
 	public FeedItem() {
 		
+	}
+	
+	public long getTimeMillis() {
+		return timeMillis;
+	}
+
+	public void setTimeMillis(long timeMillis) {
+		this.timeMillis = timeMillis;
 	}
 
 	public String getMessage() {
@@ -59,6 +70,10 @@ public class FeedItem {
 			}
 		}
 		return b.toString();
+	}
+	
+	public String getPrettyDate() {
+		return DateUtils.getRelativeTimeSpanString(timeMillis).toString();
 	}
 	
 	@Override

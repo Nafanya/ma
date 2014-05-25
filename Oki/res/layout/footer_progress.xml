@@ -11,8 +11,8 @@
 	<ProgressBar
 	    android:id="@+id/progressBar"
 		android:layout_marginRight="8dp"
-		android:layout_height="20dp"
-		android:layout_width="20dp" />
+		android:layout_height="30dp"
+		android:layout_width="30dp" />
 	
 	<TextView
 	    android:id="@+id/textView"

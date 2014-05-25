@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -41,10 +42,20 @@ public abstract class ThreadListFragment extends SherlockListFragment {
 	}
 	
 	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View v = inflater.inflate(R.layout.listview_progress, container, false);
+		
+		return v;
+		//return super.onCreateView(inflater, container, savedInstanceState);
+	}
+	
+	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		getListView().addFooterView(pFooter);
 		getListView().setDividerHeight(getResources().getDimensionPixelOffset(R.dimen.listview_divider_height_zero));
+		getListView().setFooterDividersEnabled(false);
 	}
 	
 	@Override

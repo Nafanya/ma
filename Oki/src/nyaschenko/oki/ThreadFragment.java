@@ -18,6 +18,7 @@ public abstract class ThreadFragment extends SherlockFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
+		pContext = getSherlockActivity();
 		pLoader = ImageLoader.getInstance();
 		pOdnoklassniki = Odnoklassniki.getInstance(getSherlockActivity());
 		pBackgroundThread = new ApiFetcher<String>(getSherlockActivity(), new Handler());

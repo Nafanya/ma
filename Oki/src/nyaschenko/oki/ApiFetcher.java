@@ -81,9 +81,13 @@ public class ApiFetcher<Token> extends HandlerThread {
 		
 			
 			String tempResponse = mOdnoklassniki.request(request.getMethod(), request.getParams(), "get");
-			while (tempResponse.contains("PARAM_SESSION_EXPIRED")) {
-				mOdnoklassniki.refreshToken(mContext);
-				tempResponse = mOdnoklassniki.request(request.getMethod(), request.getParams(), "get");
+			for (int attempt = 0; attempt < 3; attempt++) {
+				if (tempResponse == null || tempResponse.contains("PARAM_SESSION_EXPIRED")) {
+					mOdnoklassniki.refreshToken(mContext);
+					tempResponse = mOdnoklassniki.request(request.getMethod(), request.getParams(), "get");
+				} else {
+					break;
+				}
 			}
 			final String response = tempResponse;
 			

@@ -4,6 +4,7 @@ import nyaschenko.oki.utils.ApiRequest;
 import ru.ok.android.sdk.OkTokenRequestListener;
 import ru.ok.android.sdk.util.OkScope;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import android.widget.Button;
 public class LoginFragment extends ThreadFragment {
 	public static final String TAG = "LoginFragment";
 
+	private static final String EXTRA_LOGGED_IN = "EXTRA_LOGGED_IN";
 	private static final String REQUEST_CURRENT_USER = "REQUEST_CURRENT_USER";
 	private static final String PERMISSIONS = OkScope.VALUABLE_ACCESS + ";" + OkScope.PHOTO_CONTENT;
 	
@@ -74,12 +76,14 @@ public class LoginFragment extends ThreadFragment {
 			@Override
 			public void onSuccess(String accessToken) {
 				Log.i(TAG, "Recieved new token: " + accessToken);
-				/*
+				
 				Intent intent = new Intent(getSherlockActivity(), MainActivity.class);
-				getSherlockActivity().startActivity(intent);
+				intent.putExtra(EXTRA_LOGGED_IN, true);
+				startActivity(intent);
 				getSherlockActivity().finish();
-				*/
-				mCallbacks.onAuthComplete();
+				
+				//mCallbacks.onAuthComplete();
+				//((Callbacks) getSherlockActivity()).onAuthComplete();
 			}
 
 			@Override
@@ -105,17 +109,20 @@ public class LoginFragment extends ThreadFragment {
 		if (hasToken) {
 			pBackgroundThread.queueRequest(REQUEST_CURRENT_USER, new ApiRequest(ApiRequest.METHOD_GET_CURRENT_USER));
 		} else {
-			pOdnoklassniki.clearTokens(pContext);
+			//pOdnoklassniki.clearTokens(pContext);
 			pOdnoklassniki.requestAuthorization(pContext);
 		}
 	}
 	
 	public void onGetCurrentUser(String result) {
-		if (result.contains("PARAM_SESSION_EXPIRED")) {
+		pOdnoklassniki.refreshToken(getSherlockActivity());
+		/*
+		if (result.contains("PARAM_SESSION_EXPIRED") || true) {
 			pOdnoklassniki.refreshToken(getSherlockActivity());
 		} else {
-			mCallbacks.onAuthComplete();
+			((Callbacks) getSherlockActivity()).onAuthComplete();
 		}
+		*/
 	}
 	
 	@Override

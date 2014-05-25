@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.MenuItem;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class ScaleImageViewActivity extends SherlockActivity {
@@ -19,6 +20,7 @@ public class ScaleImageViewActivity extends SherlockActivity {
         
         setContentView(R.layout.scaledimage_activity);
         
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(getString(R.string.photo));
         
         ImageLoader loader = ImageLoader.getInstance();
@@ -27,4 +29,14 @@ public class ScaleImageViewActivity extends SherlockActivity {
         ImageView imageView = (ImageView)findViewById(R.id.scaleImageView);
         loader.displayImage(imageUrl, imageView);
     }
+    
+	@Override
+	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			finish();
+		}
+		return super.onMenuItemSelected(featureId, item);
+	}
+    
 }

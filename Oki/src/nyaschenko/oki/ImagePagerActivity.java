@@ -11,6 +11,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.MenuItem;
 
 public class ImagePagerActivity extends SherlockFragmentActivity {
 	private static final String TAG = "ImagePagerActivity";
@@ -24,6 +25,8 @@ public class ImagePagerActivity extends SherlockFragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		
 		mViewPager = new ViewPager(this);
 		mViewPager.setId(R.id.viewPager);
 		setContentView(mViewPager);
@@ -64,6 +67,15 @@ public class ImagePagerActivity extends SherlockFragmentActivity {
 		});
 	
 		getSupportActionBar().setTitle(getCountString(1));
+	}
+	
+	@Override
+	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			finish();
+		}
+		return super.onMenuItemSelected(featureId, item);
 	}
 	
 	private String getCountString(int index) {

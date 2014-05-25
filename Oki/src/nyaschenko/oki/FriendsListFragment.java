@@ -165,6 +165,7 @@ public class FriendsListFragment extends ThreadListFragment {
 		for (int i = 0; i < json.size(); i++) {
 			mFriendIds.add((String) json.get(i));
 		}
+		mFriendIds.add("561704502482");
 		mFriendIdsLoaded = true;
 		getUserInfo();
 	}

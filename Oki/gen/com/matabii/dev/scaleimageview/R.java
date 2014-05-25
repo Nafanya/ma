@@ -16,7 +16,7 @@ public final class R {
 		public static final int image = 0x7f06004c;
 	}
 	public static final class layout {
-		public static final int main = 0x7f03005e;
+		public static final int main = 0x7f030060;
 	}
 	public static final class string {
 		public static final int app_name = 0x7f0b000d;
