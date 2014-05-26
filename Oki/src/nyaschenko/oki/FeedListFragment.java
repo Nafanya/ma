@@ -16,7 +16,6 @@ import nyaschenko.oki.utils.ApiRequest;
 import nyaschenko.oki.utils.BaseAlbumDirFactory;
 import nyaschenko.oki.utils.FeedItem;
 import nyaschenko.oki.utils.FroyoAlbumDirFactory;
-import nyaschenko.oki.utils.PhotoItem;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -47,12 +46,12 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -144,14 +143,15 @@ public class FeedListFragment extends ThreadListFragment {
         };
         
         getListView().setOnScrollListener(listener);
+        /*
         getListView().setOnItemClickListener(new OnItemClickListener() {
 	        @Override
 	        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-	        	/*
-	            Intent intent = new Intent(getSherlockActivity(), ScaleImageViewActivity.class);
-	            intent.putExtra(EXTRA_IMAGE_URL, mFeedItems.get(position).getLargePhotos().get(0));
-	            startActivity(intent);
-	            */
+	        	
+	            //Intent intent = new Intent(getSherlockActivity(), ScaleImageViewActivity.class);
+	            //intent.putExtra(EXTRA_IMAGE_URL, mFeedItems.get(position).getLargePhotos().get(0));
+	            //startActivity(intent);
+	            
 	        	ArrayList<String> photos = mFeedItems.get(position).getLargePhotos();
 	        	StringBuilder b = new StringBuilder();
 	        	for (String s : photos) {
@@ -162,7 +162,7 @@ public class FeedListFragment extends ThreadListFragment {
 	        	intent.putExtra(EXTRA_IMAGE_URL, b.toString());
 	        	startActivity(intent);
 	        }
-	    });
+	    });*/
 		
 		getFeed();
 	}
@@ -437,20 +437,43 @@ public class FeedListFragment extends ThreadListFragment {
     	}
     	
     	@Override
-    	public View getView(int position, View convertView, ViewGroup parent) {
+    	public View getView(final int position, View convertView, ViewGroup parent) {
     		if (convertView == null) {
     			convertView = getActivity().getLayoutInflater()
-    					.inflate(R.layout.feed_item, parent, false);
+    					.inflate(R.layout.feed_item_like, null);
     		}
     		
     		ImageView imageView = (ImageView) convertView.findViewById(R.id.feedItem_imageView);
     		TextView message = (TextView) convertView.findViewById(R.id.feedItem_textViewMessage);
     		TextView date = (TextView) convertView.findViewById(R.id.feedItem_textViewDate);
+    		Button like = (Button) convertView.findViewById(R.id.feedItem_buttonLike);
+    		Button comment = (Button) convertView.findViewById(R.id.feedItem_buttonComment);
     		
     		FeedItem item = getItem(position);
     		
+    		like.setText(item.getLikes());
+    		comment.setText(item.getComments());
+    		
+    		imageView.setTag(item);
+    		imageView.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View arg0) {
+					ArrayList<String> photos = mFeedItems.get(position).getLargePhotos();
+		        	StringBuilder b = new StringBuilder();
+		        	for (String s : photos) {
+		        		b.append(s);
+		        		b.append('$');
+		        	}
+		        	Intent intent = new Intent(getSherlockActivity(), ImagePagerActivity.class);
+		        	intent.putExtra(EXTRA_IMAGE_URL, b.toString());
+		        	startActivity(intent);
+				}
+			});
+    		
     		message.setText(item.getMessage());
     		date.setText(item.getDate());
+    		
     		// TODO pager
     		if (!item.getLargePhotos().isEmpty()) {
     			pLoader.displayImage(item.getLargePhotos().get(0), imageView);
@@ -460,7 +483,7 @@ public class FeedListFragment extends ThreadListFragment {
     		return convertView;
     	}
     }
-	
+
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);

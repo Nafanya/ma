@@ -1,6 +1,5 @@
 package nyaschenko.oki;
 
-import ru.ok.android.sdk.Odnoklassniki;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,7 +7,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 
-import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.app.SherlockListFragment;
 import com.actionbarsherlock.view.Window;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
@@ -25,10 +23,6 @@ public class MainActivity extends SlidingFragmentActivity
 	
 	private static final String TAG = "MainActivity";
 	
-	private static final String EXTRA_LOGGED_IN = "EXTRA_LOGGED_IN";
-	private static final String APP_ID = "572588032";
-	private static final String APP_SECRET = "31F3E52DE4ECD8D56AB6FE06";
-	private static final String APP_KEY = "CBABACCDCBABABABA";
 	private static final String STATE_CURRENT_FRAGMENT = "STATE_CURRENT_FRAGMENT";
 	private static final int FRAGMENT_FEED = 0;
 	private static final int FRAGMENT_PHOTOS = 1;
@@ -39,27 +33,22 @@ public class MainActivity extends SlidingFragmentActivity
 
 	private SlidingMenu menu;
 	private static String mCurrentUserId;
-	private boolean mLoggedIn;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        Intent intent = getIntent();
-        mLoggedIn = intent.getBooleanExtra(EXTRA_LOGGED_IN, false);
-        
-        Odnoklassniki.createInstance(this, APP_ID, APP_SECRET, APP_KEY);
-        while (!Odnoklassniki.hasInstance()) {}
-        
-		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-		setSupportProgressBarIndeterminateVisibility(true);
+        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         
         setContentView(R.layout.fragment_main);
         setBehindContentView(R.layout.fragment_menu);
         
+		setSupportProgressBarIndeterminateVisibility(false);
+        
         initFragments(savedInstanceState);
         initSlidingMenu();
         initUIL();
+        
     }
 	
 	@Override
@@ -76,12 +65,7 @@ public class MainActivity extends SlidingFragmentActivity
         		(SherlockListFragment) manager.findFragmentById(R.id.fragmentContainerMenu);
 
         if (mainFragment == null) {
-        	if (mLoggedIn) {
-        		setSupportProgressBarIndeterminateVisibility(false);
-        		mainFragment = new FeedListFragment();
-        	} else {
-        		mainFragment = new LoginFragment();
-        	}
+        	mainFragment = new FeedListFragment();
             manager.beginTransaction()
                 	.add(R.id.fragmentContainerMain, mainFragment)
                 	.commit();
@@ -102,7 +86,7 @@ public class MainActivity extends SlidingFragmentActivity
 		menu.setShadowWidth(50); //15
 		menu.setFadeDegree(0f);
 		menu.setBehindOffset((int) getResources().getDimension(R.dimen.slidingmenu_offset)); //100
-		menu.setSlidingEnabled(mLoggedIn);
+		menu.setSlidingEnabled(true);
 	}
 	
 	private void initUIL() {

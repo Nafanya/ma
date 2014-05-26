@@ -9,17 +9,51 @@ public class FeedItem {
 	private long timeMillis;
 	private String date;
 	private ArrayList<String> largePhotos;
+	private ArrayList<String> smallPhotos;
+	
+	private String likes;
+	private String comments;
 	
 	public FeedItem(String message, String date, ArrayList<String> photos) {
 		this.message = cleanMessage(message);
 		this.date = date;
+		long cnt = 1;
+		for (int i = 0; i < date.length(); i++) {
+			cnt *= (int) date.charAt(i);
+		}
 		this.largePhotos = photos;
+		this.likes = Long.toString(Math.abs(cnt % 73));
+		this.comments = Long.toString(Math.abs((cnt * 37) % 46));
 	}
 
 	public FeedItem() {
 		
 	}
 	
+	public String getLikes() {
+		return likes;
+	}
+
+	public void setLikes(String likes) {
+		this.likes = likes;
+	}
+
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+
+	public ArrayList<String> getSmallPhotos() {
+		return smallPhotos;
+	}
+
+	public void setSmallPhotos(ArrayList<String> smallPhotos) {
+		this.smallPhotos = smallPhotos;
+	}
+
 	public long getTimeMillis() {
 		return timeMillis;
 	}

@@ -19,7 +19,8 @@ public class LoginFragment extends ThreadFragment {
 
 	private static final String EXTRA_LOGGED_IN = "EXTRA_LOGGED_IN";
 	private static final String REQUEST_CURRENT_USER = "REQUEST_CURRENT_USER";
-	private static final String PERMISSIONS = OkScope.VALUABLE_ACCESS + ";" + OkScope.PHOTO_CONTENT;
+	//private static final String PERMISSIONS = OkScope.VALUABLE_ACCESS + ";" + OkScope.PHOTO_CONTENT;
+	private static final String PERMISSIONS = OkScope.VALUABLE_ACCESS + ";" + OkScope.PHOTO_CONTENT + ";" + "LIKE";
 	
 	Button loginButton;
 	

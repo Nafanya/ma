@@ -19,14 +19,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.assist.PauseOnScrollListener;
@@ -36,9 +38,12 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
 public class PhotosListFragment extends ThreadListFragment {
 	private static final String TAG = "PhotosListFragment";
+	private static final String EXTRA_COMMENT_FOCUS = "EXTRA_COMMENT_FOCUS";
 	private static final String EXTRA_USER_ID = "EXTRA_USER_ID";
 	private static final String EXTRA_IMAGE_URL = "EXTRA_IMAGE_URL";
 	private static final String REQUEST_GET_PHOTOS = "REQUEST_GET_PHOTOS";
+	private static final String REQUEST_LIKE = "REQUEST_LIKE";
+	
 	
 	// TODO: move to PhotoItem
 	private static final String PHOTO_SMALL = "pic50x50";
@@ -48,6 +53,8 @@ public class PhotosListFragment extends ThreadListFragment {
 	private ArrayList<PhotoItem> mPhotos;
 	private boolean mHasMore = true;
 	private boolean mLoadingMore = false;
+	private boolean mLikingNow = false;
+	private int mLikeIndex;
 	private String mAnchor = null;
 	private String mCurrentUserId = null;
 
@@ -67,6 +74,8 @@ public class PhotosListFragment extends ThreadListFragment {
 				if (isVisible()) {
 					if (token.equals(REQUEST_GET_PHOTOS)) {
 						parsePhotos(result);
+					} else if (token.equals(REQUEST_LIKE)) {
+						parseLike(result);
 					}
 				}
 			}
@@ -116,6 +125,7 @@ public class PhotosListFragment extends ThreadListFragment {
         };
         
         getListView().setOnScrollListener(listener);
+        /*
         getListView().setOnItemClickListener(new OnItemClickListener() {
 	        @Override
 	        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -123,7 +133,25 @@ public class PhotosListFragment extends ThreadListFragment {
 	            intent.putExtra(EXTRA_IMAGE_URL, mPhotos.get(position).getUrlLarge());
 	            startActivity(intent);
 	        }
-	    });
+	    });*/
+        /*
+        getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        	public void onItemClick(AdapterView<?> list, View v, int pos, long id) {
+        		int viewId = v.getId();
+        		switch (viewId) {
+        		case R.id.photo_item_imageView:
+        			Toast.makeText(pContext, "Photo at pos: " + pos, Toast.LENGTH_SHORT).show();
+        			break;
+        		case R.id.buttonLike:
+        			Toast.makeText(pContext, "Like at pos: " + pos, Toast.LENGTH_SHORT).show();
+        			break;
+        		case R.id.buttonComment:
+        			Toast.makeText(pContext, "Comment at pos: " + pos, Toast.LENGTH_SHORT).show();
+        			break;
+        		}
+        	}
+        });*/
+        
 	}
 	
 	public static PhotosListFragment newInstance(String userId) {
@@ -142,29 +170,64 @@ public class PhotosListFragment extends ThreadListFragment {
     	}
     	
     	@Override
-    	public View getView(int position, View convertView, ViewGroup parent) {
+    	public View getView(final int position, View convertView, ViewGroup parent) {
     		if (convertView == null) {
     			convertView = getActivity().getLayoutInflater()
-    					.inflate(R.layout.photo_item, null);
+    					.inflate(R.layout.photo_item_like, null);
     		}
     		
-    		ImageView imageView = (ImageView) convertView
-    				.findViewById(R.id.photo_item_imageView);
-    		
-    		TextView marks = (TextView) convertView
-    				.findViewById(R.id.photo_item_likeCount);
-    		TextView text = (TextView) convertView
-    				.findViewById(R.id.photo_item_text);
-    		TextView comments = (TextView) convertView
-    				.findViewById(R.id.photo_item_commentCount);
+    		ImageView imageView = (ImageView) convertView.findViewById(R.id.photo_item_imageView);
+    		Button like = (Button) convertView.findViewById(R.id.buttonLike);
+    		Button comment = (Button) convertView.findViewById(R.id.buttonComment);
+    		TextView text = (TextView) convertView.findViewById(R.id.photo_item_text);
     		
     		PhotoItem item = getItem(position);
     		
-    		marks.setText(item.getMarksCount());
-    		text.setText(item.getText());
-    		comments.setText(item.getCommentsCount());
+    		if (item.isLiked()) {
+    			like.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_good, 0, 0, 0);
+    		} else {
+    			like.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_good, 0, 0, 0);
+    		}
     		
-    		//pLoader.displayImage(item.getUrlLarge(), imageView);
+    		imageView.setTag(item);
+			text.setTag(item);
+			like.setTag(item);
+			comment.setTag(item);
+    		
+    		like.setText(item.getMarksCount());
+    		text.setText(item.getText());
+    		comment.setText(item.getCommentsCount());
+    		
+    		imageView.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View arg0) {
+		        	Intent intent = new Intent(getSherlockActivity(), ImagePagerActivity.class);
+		        	intent.putExtra(EXTRA_IMAGE_URL, mPhotos.get(position).getUrlLarge());
+		        	startActivity(intent);
+					/*
+					Intent intent = new Intent(getSherlockActivity(), ScaleImageViewActivity.class);
+		            intent.putExtra(EXTRA_IMAGE_URL, mPhotos.get(position).getUrlLarge());
+		            startActivity(intent);
+		            */
+				}
+			});
+			like.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					//Toast.makeText(getSherlockActivity(), "Like at pos: " + position, Toast.LENGTH_SHORT).show();
+					addLike(mPhotos.get(position).getId(), position);
+				}
+			});
+			comment.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(getSherlockActivity(), ScaleImageViewActivity.class);
+		            intent.putExtra(EXTRA_IMAGE_URL, mPhotos.get(position).getUrlLarge());
+		            intent.putExtra(EXTRA_COMMENT_FOCUS, true);
+		            startActivity(intent);
+				}
+			});
+    		
     		pLoader.displayImage(item.getUrlLarge(), imageView, null, animateFirstListener);
     		return convertView;
     	}
@@ -225,6 +288,7 @@ public class PhotosListFragment extends ThreadListFragment {
 			for (int i = 0; i < photos.length(); i++) {
 				try {
 					JSONObject photo = photos.getJSONObject(i);
+					String id = photo.getString("id");
 					String urlSmall = photo.getString(PHOTO_SMALL);
 					String urlMedium = photo.getString(PHOTO_MEDIUM);
 					String urlLarge = photo.getString(PHOTO_LARGE);
@@ -238,6 +302,7 @@ public class PhotosListFragment extends ThreadListFragment {
 					String markCount = photo.getString("mark_count");
 					
 					PhotoItem item = new PhotoItem();
+					item.setId(id);
 					item.setUrlSmall(urlSmall);
 					item.setUrlMedium(urlMedium);
 					item.setUrlLarge(urlLarge);
@@ -263,4 +328,24 @@ public class PhotosListFragment extends ThreadListFragment {
 		mLoadingMore = false;
 	}
 	
+	private void addLike(String id, int position) {
+		if (!mLikingNow) {
+			mLikingNow = true;
+			HashMap<String, String> params = new HashMap<String, String>();
+			params.put("photo_id", id);
+			ApiRequest request = new ApiRequest("photos.addPhotoLike", params);
+			pBackgroundThread.queueRequest(REQUEST_LIKE, request);
+		}
+	}
+	
+	private void parseLike(String response) {
+		if (!response.contains("error_code")) {
+			//"error.internalLike.selfLike"
+			int marks = Integer.parseInt(mPhotos.get(mLikeIndex).getMarksCount()) + 1; 
+			mPhotos.get(mLikeIndex).setMarksCount(Integer.toString(marks));
+			mPhotos.get(mLikeIndex).setLiked(true);
+			pAdapter.notifyDataSetChanged();
+		}
+		mLikingNow = false;
+	}
 }

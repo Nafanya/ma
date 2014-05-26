@@ -10,10 +10,10 @@ public final class R {
 	public static final class drawable {
 		public static final int icon = 0x7f020118;
 		public static final int image = 0x7f020119;
-		public static final int sample = 0x7f02011a;
+		public static final int sample = 0x7f02011b;
 	}
 	public static final class id {
-		public static final int image = 0x7f06004c;
+		public static final int image = 0x7f06004d;
 	}
 	public static final class layout {
 		public static final int main = 0x7f030060;

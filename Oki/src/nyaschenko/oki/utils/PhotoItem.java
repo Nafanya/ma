@@ -4,14 +4,26 @@ public class PhotoItem {
 	private String mUrlSmall;
 	private String mUrlMedium;
 	private String mUrlLarge;
-	//TODO: maybe Long instead String ?
 	private String id;
 	private String userId;
+	private boolean liked;
 	
 	private String text;
 	private String commentsCount;
 	private String marksCount;
 	
+	public PhotoItem() {
+		liked = false;
+	}
+	
+	public boolean isLiked() {
+		return liked;
+	}
+
+	public void setLiked(boolean wasLiked) {
+		this.liked = wasLiked;
+	}
+
 	public String getUrl() {
 		return mUrlLarge;
 	}

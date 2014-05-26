@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="5dp"
+    android:background="@color/background_light_grey" >
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background_white"
+        android:orientation="vertical"
+       	android:padding="5dp"
+       	android:layout_margin="5dp" >
+    
+        <TextView
+	        android:id="@+id/feedItem_textViewDate"
+	        android:layout_height="wrap_content"
+	        android:layout_width="match_parent"
+	        android:padding="5dp" />
+         
+	    <TextView
+	        android:id="@+id/feedItem_textViewMessage"
+	        android:layout_height="wrap_content"
+	        android:layout_width="match_parent"
+	        android:padding="5dp" />
+	    
+	    <ImageView 
+	        android:id="@+id/feedItem_imageView"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:clickable="true"
+	        android:padding="5dp"
+	        android:contentDescription="@null" />
+	    
+	    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+        
+	        <Button
+	            android:id="@+id/feedItem_buttonLike"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:background="@color/background_white"
+	            android:contentDescription="@null"
+	            android:layout_gravity="right"
+	            android:clickable="false"
+	            android:drawableLeft="@drawable/ic_action_good"
+	        	android:text="1" />
+	        
+	        <View
+	            android:layout_height="0dp"
+	            android:layout_width="0dp"
+	            android:layout_weight="1" />
+	        
+	        <Button
+	            android:id="@+id/feedItem_buttonComment"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:background="@color/background_white"
+	            android:contentDescription="@null"
+	            android:layout_gravity="left"
+	            android:clickable="false"
+	            android:drawableLeft="@drawable/ic_action_chat"
+	        	android:text="2" />
+	        
+        </LinearLayout>
+    
+    </LinearLayout>
+    
+
+</LinearLayout>

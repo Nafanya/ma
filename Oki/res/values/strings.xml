@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Oki</string>
+    <string name="app_name">Фотострим</string>
     <string name="action_settings">Settings</string>
     
     <string name="action_refresh">Refresh</string>
@@ -9,6 +9,7 @@
     <string name="album_name">OK Photos</string>
     <string name="enter">Войти</string>
     <string name="check_internet_connection">Проверьте подключение к интернету</string>
+    <string name="error_during_connection">Ошибка при подключении</string>
     <string name="loading">Загрузка</string>
     <string name="menu_pickFromGallery">Загрузить из галереи</string>
     <string name="menu_takePhoto">Сделать снимок</string>
